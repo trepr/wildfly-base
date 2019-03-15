@@ -39,8 +39,8 @@ WORKDIR /opt/jboss
 EXPOSE 8009 8080 9990
 
 # Volumes we're interested in
-VOLUME /opt/jboss/wildfly/standalone/log
-VOLUME /var/logs
+#VOLUME /opt/jboss/wildfly/standalone/log
+#VOLUME /var/logs
 
 # Set the default command to run on boot
 # This will boot WildFly in the standalone mode and bind to all interface
