@@ -30,17 +30,17 @@ RUN groupadd -r jboss -g 1000 \
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
 
+# creates /run/secrets directory
+RUN mkdir -p /run/secrets && chown -R jboss:jboss /run/secrets
+
+# Switch back to jboss user
 USER jboss
 
-# Set the working directory to jboss' user home directory
-WORKDIR /opt/jboss
+# Set the working directory
+WORKDIR $JBOSS_HOME
 
 # Expose the ports we're interested in
 EXPOSE 8009 8080 9990
-
-# Volumes we're interested in
-#VOLUME /opt/jboss/wildfly/standalone/log
-#VOLUME /var/logs
 
 # Set the default command to run on boot
 # This will boot WildFly in the standalone mode and bind to all interface
