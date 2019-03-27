@@ -15,6 +15,7 @@ USER root
 #    making it easier to use volumes (no permission issues)
 # 2. Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
 #    Make sure the distribution is available from a well-known place
+# 3. Creates /run/secrets directory and set owner to jboss
 RUN groupadd -r jboss -g 1000 \
     && useradd -u 1000 -r -g jboss -m -d /opt/jboss -s /sbin/nologin -c "JBoss user" jboss \
     && chmod 755 /opt/jboss \
@@ -25,13 +26,12 @@ RUN groupadd -r jboss -g 1000 \
     && mv $HOME/wildfly-$WILDFLY_VERSION $JBOSS_HOME \
     && rm wildfly-$WILDFLY_VERSION.tar.gz \
     && chown -R jboss:jboss ${JBOSS_HOME} \
-    && chmod -R g+rw ${JBOSS_HOME}
+    && chmod -R g+rw ${JBOSS_HOME} \
+    && mkdir -p /run/secrets \
+    && chown -R jboss:jboss /run/secrets
     
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
-
-# creates /run/secrets directory
-RUN mkdir -p /run/secrets && chown -R jboss:jboss /run/secrets
 
 # Switch back to jboss user
 USER jboss
