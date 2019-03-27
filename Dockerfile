@@ -27,9 +27,9 @@ RUN groupadd -r jboss -g 1000 \
     && mv $HOME/wildfly-$WILDFLY_VERSION $JBOSS_HOME \
     && rm wildfly-$WILDFLY_VERSION.tar.gz \
     && chown -R jboss:jboss ${JBOSS_HOME} \
-    && chmod -R g+rw ${JBOSS_HOME} \
-    && mkdir -p /run/secrets \
-    && chown -R jboss:jboss /run/secrets
+    && chmod -R g+rw ${JBOSS_HOME}
+#    && mkdir -p /run/secrets \
+#    && chown -R jboss:jboss /run/secrets
     
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
