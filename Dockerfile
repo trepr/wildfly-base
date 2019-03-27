@@ -16,6 +16,7 @@ USER root
 # 2. Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
 #    Make sure the distribution is available from a well-known place
 # 3. Creates /run/secrets directory and set owner to jboss
+#    ???? aparently this doesnt work
 RUN groupadd -r jboss -g 1000 \
     && useradd -u 1000 -r -g jboss -m -d /opt/jboss -s /sbin/nologin -c "JBoss user" jboss \
     && chmod 755 /opt/jboss \
