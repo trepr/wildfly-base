@@ -26,8 +26,8 @@ RUN groupadd -r jboss -g 1000 \
     && tar xf wildfly-$WILDFLY_VERSION.tar.gz \
     && mv $HOME/wildfly-$WILDFLY_VERSION $JBOSS_HOME \
     && rm wildfly-$WILDFLY_VERSION.tar.gz \
-    && chown -R jboss:jboss ${JBOSS_HOME} \
-    && chmod -R g+rw ${JBOSS_HOME}
+    && chown -R jboss:0 ${JBOSS_HOME} \
+    && chmod -R ug+rw ${JBOSS_HOME}
 #    && mkdir -p /run/secrets \
 #    && chown -R jboss:jboss /run/secrets
     
